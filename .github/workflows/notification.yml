@@ -1,0 +1,27 @@
+name: Notification du calendrier
+
+on:
+  schedule:
+    # Heures en UTC : en décembre, Paris = UTC+1
+    - cron: '0 9 1-24 12 *'   # 10h à Paris, du 1er au 24 décembre
+    - cron: '0 19 25 12 *'    # 20h à Paris, le 25 décembre
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Texte de la notification (vide = « Ouvre ta case !! 🎁 »)'
+        required: false
+        default: ''
+
+jobs:
+  envoyer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Installer web-push
+        run: npm install --no-save --no-audit --no-fund web-push@3
+      - name: Envoyer la notification
+        run: node outils/envoyer-notification.mjs
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          ABONNEMENTS: ${{ secrets.ABONNEMENTS }}
+          MESSAGE: ${{ inputs.message }}

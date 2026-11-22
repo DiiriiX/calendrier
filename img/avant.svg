@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs>
+<pattern id="maille" width="7" height="7" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#a01b24"/>
+  <path d="M.5 .5L3.5 6.5L6.5 .5" stroke="#7a1119" stroke-width="1.3" fill="none"/>
+  <path d="M1.3 .9L3.5 5.4" stroke="#c9434b" stroke-width=".8"/>
+</pattern>
+<pattern id="mailleCreme" width="6" height="6" patternUnits="userSpaceOnUse">
+  <rect width="6" height="6" fill="#efe6d4"/>
+  <path d="M.5 .5L3 5.5L5.5 .5" stroke="#cfc2a8" stroke-width="1.1" fill="none"/>
+</pattern>
+<filter id="fourrure" x="-20%" y="-40%" width="140%" height="180%">
+  <feTurbulence type="fractalNoise" baseFrequency=".18" numOctaves="2" seed="3" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+  <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="8" result="g"/>
+  <feColorMatrix in="g" values="0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .44  0 0 0 1.3 -.6" result="g2"/>
+  <feComposite in="g2" in2="d" operator="in" result="g3"/>
+  <feMerge><feMergeNode in="d"/><feMergeNode in="g3"/></feMerge>
+</filter>
+<linearGradient id="gJambe" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".3" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient>
+<linearGradient id="gPied" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></linearGradient>
+<linearGradient id="gRevers" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset=".7" stop-color="#ece4d6"/><stop offset="1" stop-color="#c9bda8"/></linearGradient>
+<linearGradient id="gFer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3a1c"/><stop offset=".25" stop-color="#1c1513"/><stop offset="1" stop-color="#0b0807"/></linearGradient>
+<radialGradient id="gBoule" cx=".35" cy=".3" r=".7"><stop offset="0" stop-color="#b8743a"/><stop offset=".35" stop-color="#2a1f1a"/><stop offset="1" stop-color="#0a0706"/></radialGradient>
+<linearGradient id="gCrochet" x1="0" x2="1"><stop offset="0" stop-color="#f6dc8e"/><stop offset="1" stop-color="#8a6a20"/></linearGradient>
+<clipPath id="cpChaussette"><path d="M414 260L414 360C414 384 404 394 388 396L366 398C346 400 334 412 338 425C342 438 360 442 382 440L432 436C464 432 482 410 482 380L480 260Z"/></clipPath>
+</defs><rect x="212" y="524" width="176" height="7" rx="2" fill="url(#gFer)"/><rect x="217" y="528" width="6" height="18" fill="#0d0a09"/><rect x="377" y="528" width="6" height="18" fill="#0d0a09"/><rect x="229.8" y="494" width="4.4" height="32" fill="url(#gFer)"/><circle cx="232" cy="491" r="5.2" fill="url(#gBoule)"/><rect x="279.8" y="494" width="4.4" height="32" fill="url(#gFer)"/><circle cx="282" cy="491" r="5.2" fill="url(#gBoule)"/><rect x="315.8" y="494" width="4.4" height="32" fill="url(#gFer)"/><circle cx="318" cy="491" r="5.2" fill="url(#gBoule)"/><rect x="365.8" y="494" width="4.4" height="32" fill="url(#gFer)"/><circle cx="368" cy="491" r="5.2" fill="url(#gBoule)"/><g transform="translate(446 226) scale(.88) translate(-446 -226)"><path d="M446 216V226" stroke="url(#gCrochet)" stroke-width="3.5" stroke-linecap="round"/><circle cx="446" cy="216" r="3.5" fill="url(#gCrochet)"/><path d="M440 236C440 222 452 222 452 236" stroke="#8a1620" stroke-width="3" fill="none"/><path d="M468 246V214Q468 202 458 202Q448 202 448 211" stroke="#fbf6ee" stroke-width="7.5" fill="none" stroke-linecap="round"/><path d="M468 246V214Q468 202 458 202Q448 202 448 211" stroke="#c41e2e" stroke-width="7.5" stroke-dasharray="4 5" fill="none"/><path d="M466 246V214" stroke="#fff" stroke-width="1.5" opacity=".6"/><path d="M414 260L414 360C414 384 404 394 388 396L366 398C346 400 334 412 338 425C342 438 360 442 382 440L432 436C464 432 482 410 482 380L480 260Z" fill="url(#maille)"/><g clip-path="url(#cpChaussette)"><rect x="400" y="290" width="90" height="26" fill="url(#mailleCreme)"/><path d="M400 291.5H490M400 314.5H490" stroke="#a01b24" stroke-width="2.4"/><path d="M408 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M420 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M432 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M444 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M456 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M468 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M480 303l4-5 4 5-4 5z" fill="#b3202a"/><path d="M366 398C346 400 334 412 338 425C342 438 360 442 382 440C370 430 362 414 366 398Z" fill="url(#mailleCreme)"/><path d="M482 372C482 406 464 430 434 436C440 420 456 402 470 372Z" fill="url(#mailleCreme)"/><rect x="380" y="250" width="110" height="200" fill="url(#gJambe)"/><rect x="330" y="380" width="160" height="70" fill="url(#gPied)"/></g><path d="M414 260L414 360C414 384 404 394 388 396L366 398C346 400 334 412 338 425C342 438 360 442 382 440L432 436C464 432 482 410 482 380L480 260Z" fill="none" stroke="#5e0c12" stroke-width="1.2" opacity=".7"/><rect x="404" y="232" width="84" height="36" rx="12" fill="url(#gRevers)" filter="url(#fourrure)"/><rect x="408" y="262" width="76" height="6" rx="3" fill="#8c7f6a" opacity=".25"/></g></svg>
