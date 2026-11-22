@@ -428,6 +428,7 @@
 
   async function carteNotif() {
     try {
+      if (location.hash === '#cles') return pageCles();
       if (window.top !== window.self) return afficherCarte(null);
       const pref = lire('avent-notif', {});
       if (pref.fini || (pref.plusTard && Date.now() - pref.plusTard < 2 * 864e5)) return afficherCarte(null);
@@ -441,7 +442,32 @@
     } catch { afficherCarte(null); }
   }
 
+  // #cles : génère les clés des notifications sur l'appareil (la clé privée ne quitte pas le téléphone)
+  async function pageCles() {
+    const k = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']);
+    const brut = new Uint8Array(await crypto.subtle.exportKey('raw', k.publicKey));
+    const jwk = await crypto.subtle.exportKey('jwk', k.privateKey);
+    const pub = btoa(String.fromCharCode(...brut)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    carte.innerHTML = `<div class="cn"><svg viewBox="0 0 24 24"><use href="#i-cloche"/></svg>
+      <p class="cn-t">Clés des notifications</p>
+      <p class="cn-s">Garde cette page ouverte le temps de tout copier. Recharger la page crée d'autres clés.</p>
+      <p class="cn-s" style="grid-column:1/-1;margin-top:8px"><b>1. Clé privée</b> : à coller dans le secret GitHub <b>VAPID_PRIVATE_KEY</b>. Ne la donne à personne.</p>
+      <textarea readonly data-cle="prive">${jwk.d}</textarea>
+      <div class="cn-btns"><button type="button" class="cn-ok" data-copier="prive">Copier la clé privée</button></div>
+      <p class="cn-s" style="grid-column:1/-1;margin-top:8px"><b>2. Clé publique</b> : à envoyer à Claude (elle n'est pas secrète).</p>
+      <textarea readonly data-cle="pub">${pub}</textarea>
+      <div class="cn-btns"><button type="button" class="cn-ok" data-copier="pub">Copier la clé publique</button></div></div>`;
+    carte.hidden = false;
+  }
+
   carte.addEventListener('click', async (e) => {
+    const cp = e.target.closest('[data-copier]');
+    if (cp) {
+      const zone = $(`[data-cle="${cp.dataset.copier}"]`, carte);
+      try { await navigator.clipboard.writeText(zone.value); toast('Copié !'); }
+      catch { zone.focus(); zone.select(); toast('Sélectionne le texte et copie-le'); }
+      return;
+    }
     const b = e.target.closest('[data-cn]'); if (!b) return;
     const act = b.dataset.cn;
     if (act === 'plus-tard') { ecrire('avent-notif', { plusTard: Date.now() }); afficherCarte(null); }

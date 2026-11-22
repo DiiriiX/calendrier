@@ -35,12 +35,14 @@ Adresse de l'app : **https://diiriix.github.io/calendrier/**
 
 Il faut iOS 16.4 ou plus récent, et l'app installée sur l'écran d'accueil.
 
-1. **Settings → Secrets and variables → Actions → New repository secret**
-   - Nom : `VAPID_PRIVATE_KEY`, valeur : la clé privée (donnée à part, ne jamais la mettre dans le code).
-2. Dans l'app installée, toucher **Activer les notifications**, autoriser, puis **Copier le code**.
-3. Nouveau secret : nom `ABONNEMENTS`, valeur : le code copié.
+1. Ouvrir https://diiriix.github.io/calendrier/#cles : la page crée une paire de clés sur le téléphone.
+2. **Settings → Secrets and variables → Actions → New repository secret**
+   - Nom : `VAPID_PRIVATE_KEY`, valeur : la **clé privée** (ne jamais la mettre dans le code).
+   - La **clé publique** va dans `vapidPublic` de `js/config.js`.
+3. Dans l'app installée, toucher **Activer les notifications**, autoriser, puis **Copier le code**.
+4. Nouveau secret : nom `ABONNEMENTS`, valeur : le code copié.
    Plusieurs téléphones ? Mettre les codes à la suite, ou entre crochets `[code1, code2]`.
-4. Test : onglet **Actions → Notification du calendrier → Run workflow**.
+5. Test : onglet **Actions → Notification du calendrier → Run workflow**.
 
 Ensuite, c'est automatique : 10h (heure de Paris) du 1er au 24 décembre, 20h le 25.
 
