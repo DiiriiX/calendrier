@@ -1,5 +1,5 @@
 /* Service worker : fonctionnement hors ligne + notifications */
-const CACHE = 'avent-v4';
+const CACHE = 'avent-v5';
 const FICHIERS = [
   './', './index.html', './css/style.css', './js/config.js', './js/dessins.js', './js/app.js', './js/scene.js', './js/decor-data.js',
   './img/decor.svg', './img/avant.svg',
@@ -25,8 +25,12 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   const garder = url.origin === location.origin || url.host.endsWith('fonts.googleapis.com') || url.host.endsWith('fonts.gstatic.com');
   if (!garder) return;
+  // fichiers du site : on redemande toujours au serveur la dernière version (no-cache)
+  const charger = url.origin === location.origin
+    ? fetch(e.request.url, { cache: 'no-cache', credentials: 'same-origin' }).then((r) => (r.redirected ? fetch(e.request) : r))
+    : fetch(e.request);
   e.respondWith(
-    fetch(e.request)
+    charger
       .then((rep) => {
         const copie = rep.clone();
         caches.open(CACHE).then((c) => c.put(e.request, copie));
