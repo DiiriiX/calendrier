@@ -1,5 +1,5 @@
 /* Service worker : fonctionnement hors ligne + notifications */
-const CACHE = 'avent-v5';
+const CACHE = 'avent-v6';
 const FICHIERS = [
   './', './index.html', './css/style.css', './js/config.js', './js/dessins.js', './js/app.js', './js/scene.js', './js/decor-data.js',
   './img/decor.svg', './img/avant.svg',

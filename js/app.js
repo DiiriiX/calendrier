@@ -497,7 +497,17 @@
 
   try {
     if ('serviceWorker' in navigator && window.isSecureContext && window.top === window.self) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
+      navigator.serviceWorker.register('sw.js').then((reg) => {
+        // quand l'app revient au premier plan, on vérifie s'il y a une nouvelle version
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update().catch(() => {}); });
+      }).catch(() => {});
+      // nouvelle version installée : on recharge pour l'afficher tout de suite
+      const avaitControleur = !!navigator.serviceWorker.controller;
+      let recharge = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!avaitControleur || recharge) return;
+        recharge = true; location.reload();
+      });
     }
   } catch {}
 }
