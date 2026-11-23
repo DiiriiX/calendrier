@@ -19,7 +19,7 @@ window.CONFIG = {
     texte: "Ouvre ta case !! 🎁"
   },
   // clé publique des notifications (la clé privée est dans les secrets GitHub)
-  vapidPublic: ""
+  vapidPublic: "BI3pmmiMf125G3VuXU-nO37EO2HcIJf0VpKyy0hPvytQaxp0S7usSE3ZWM7lY_Sr1l-U5HXr_hxjQJc3a30D-tg"
 };
 
 /* ============================================================
